@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="ISO-8859-1">
+  <title>Sign Up</title>
+  <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+  <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+</head>
+<body style="background: whitesmoke">
+<div class="container text-center">
+  <div>
+    <h1>User Registration - Sign Up</h1>
+    <div th:if="${usernameExists}">
+      <h2 style="color:maroon">Username already exists!</h2>
+    </div>
+
+    <div th:if="${incorrectPw}">
+      <h2 style="color:maroon">Password must contains at least: </h2>
+      <h5 style="color:maroon"> 1 number</h5>
+      <h5 style="color:maroon"> 1 letter</h5>
+      <h5 style="color:maroon"> and must be at least 8 character long!</h5>
+    </div>
+
+  </div>
+  <form th:action="@{/process_register}" th:object="${user}"
+        method="post" style="max-width: 600px; margin: 0 auto;">
+    <div class="m-3">
+
+      <div class="form-group row">
+        <label class="col-4 col-form-label">Username: <i>(required)</i></label>
+        <div class="col-8">
+          <input type="text" th:field="*{userName}" class="form-control"
+                 required minlength="6"/>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-4 col-form-label">Password: <i>(required)</i></label>
+        <div class="col-8">
+          <input minlength="8" type="password" th:field="*{password}" class="form-control" required/>
+        </div>
+      </div>
+      <div class="form-group row"></div>
+      <div class="form-group row">
+        <label class="col-4 col-form-label">Full Name: </label>
+        <div class="col-8">
+          <input th:field="*{name}" class="form-control"/>
+        </div>
+      </div>
+      <div class="text-center">
+        <button type="submit" class="btn btn-success" style="width: 500px">Sign Up</button>
+      </div>
+    </div>
+
+  </form>
+</div>
+</body>
+</html>
